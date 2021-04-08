@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 6408682461990488484}
   - component: {fileID: 3958307577062932016}
   - component: {fileID: 3138484588970666726}
+  - component: {fileID: 2443270212199812702}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -108,7 +109,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7131907541094644482}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.556, z: 0}
+  m_LocalPosition: {x: 0, y: 1.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 871987394957366741}
@@ -166,6 +167,23 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2443270212199812702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7131907541094644482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef46373f1dcf6eb4cb8a6db2894e6829, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  height: 1.6
+  moveSpeed: 100
+  turnSpeed: 100
+  distanceLimit: 1
+  controller: {fileID: 8423290469870725372}
 --- !u!1 &8423290469173276232
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,7 +311,6 @@ GameObject:
   - component: {fileID: 8423290469870725370}
   - component: {fileID: 8423290469870725371}
   - component: {fileID: 8423290469870725372}
-  - component: {fileID: 8423290469870725373}
   - component: {fileID: -3169322841878219002}
   - component: {fileID: 2748933103762292212}
   - component: {fileID: 1316309152767874890}
@@ -331,8 +348,8 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_AngularDrag: 0
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
@@ -349,23 +366,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a71a8df3fb48d4a42b5fdb2167bbbbd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 4
-  mouseSensitivityX: 5
-  mouseSensitivityY: 5
-  jumpForce: 5
---- !u!114 &8423290469870725373
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8423290469870725374}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7efc5007e0304a5a9b1151534ee63eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerHead: {fileID: 7131907541094644482}
+  yAxisInput: Vertical
+  xAxisInput: Horizontal
+  inputMouseX: Mouse X
+  inputMouseY: Mouse Y
+  jumpButton: Jump
+  mouseSensitivity: 1
+  groundAcceleration: 100
+  airAcceleration: 100
+  groundLimit: 12
+  airLimit: 1
+  gravity: 16
+  friction: 6
+  jumpHeight: 6
+  rampSlideLimit: 5
+  slopeLimit: 45
+  additiveJump: 1
+  autoJump: 1
+  clampGroundSpeed: 0
+  disableBunnyHopping: 0
 --- !u!114 &-3169322841878219002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -382,7 +401,7 @@ MonoBehaviour:
   syncInterval: 0.1
   componentsToDestroy:
   - {fileID: 8423290469870725372}
-  - {fileID: 8423290469870725373}
+  - {fileID: 2443270212199812702}
   gameObjectsToDestroy:
   - {fileID: 8423290469173276232}
 --- !u!114 &2748933103762292212
@@ -597,7 +616,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8423290470791753952}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: ae325f81fae45e447b409537cd6a0075, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5

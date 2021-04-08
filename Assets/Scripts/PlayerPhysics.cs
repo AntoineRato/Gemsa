@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerPhysics : MonoBehaviour
 {
-    [SerializeField] private GameObject playerHead;
+    #region PreviousVersion
+    /*[SerializeField] private GameObject playerHead;
 
     private Vector3 playerVelocity;
     private Vector3 playerHorizontalRotation;
@@ -65,5 +66,6 @@ public class PlayerPhysics : MonoBehaviour
     {
         this.playerRigidbody.MoveRotation(this.playerRigidbody.rotation * Quaternion.Euler(this.playerHorizontalRotation));
         playerHead.transform.Rotate(-playerVerticalRotation);
-    }
+    }*/
+    #endregion
 }
