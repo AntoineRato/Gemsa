@@ -1,0 +1,128 @@
+Classic FPS Controller
+
+
+Contact: hibezen@gmail.com
+Playable Demo: https://hibezen.itch.io/classic-fps-controller
+Video: https://www.youtube.com/watch?v=sEpWWVAk00I
+
+
+The player prefab is  a fully setup, ready-to-use player
+gameobject. You can ignore the setup instruction below if you choose
+to use the prefab instead of integrating the scripts on an another 
+object.
+
+
+Setup:
+
+	PlayerController script must be put on your player gameobject.
+	The script requires also a rigidbody and a capsule collider
+	on the same object.
+
+	The player collider has to use the PlayerPhysicsMaterial. Also make 
+	sure that the rigidbody has all rotation constraints enabled.
+	I also suggest using Interpolation and Continous Dynamic collision
+	detection.
+
+	Camera needs to be in a separate object. It does not matter
+	whether the camera object is child of the player or not.
+	Your camera object should use the SmoothPlayerCamera script.
+	This script needs the reference to your PlayerController script
+	to be assigned manually.
+
+	Because the movement uses a rigidbody, it will feel smoother with 
+	lower Fixed Timestep values. I used value of 0.0125 for the demo.
+	This value can be changed from Project Settings => Time.
+
+
+PlayerController
+	
+	The first 5 values are just the movement keys (Specified 
+	in input manager).
+
+	Mouse Sensitivity (default: 1)
+		Self-explanatory
+
+	Ground Acceleration (default: 100)
+		Determines how quickly the player accelerates on ground.
+		
+	Air Acceleration (default: 100)
+		Determines how quickly the player accelerates in air.
+		Higher values will make gaining speed by air strafing
+		easier. Surfing also works best with high values.
+		
+	Ground Limit (default: 12)
+		Determines the maximum speed on ground. The actual speed 
+		in game will be generally a little slower due to friction.
+		Note that you can exceed this value by ground strafing 
+		if Clamp Ground Speed is turned off.
+		
+	Air Limit (default: 1)
+		Determines the maximum speed you can move in air without
+		air strafing. Note that altering this value will change 
+		the behaviour of air strafing drastically, with higher 
+		values making gaining speed easier.
+	
+	Gravity (default: 16)
+		Self-explanatory
+	
+	Friction (default: 6)
+		Self-explanatory. Note that higher values will make 
+		gaining speed by ground strafing harder
+		
+	Jump Height (default: 6)
+		Self-explanatory. Note that this is a velocity value, 
+		not the actual height
+		
+	Ramp Slide Limit (default: 5)
+		How quickly you must travel upwards to make the controller
+		think you're in air. In other words, the lower this value, 
+		the easier it is to slide up slopes
+
+	Max Slope Angle	(default: 45)
+		Determines on how steep slopes you can walk on.
+		
+	Additive Jump (default: true)
+		With this setting enabled, you can gain extra height by
+		chaining multiple jumps together, or by jumping while 
+		running up a slope. When this setting is disabled, every 
+		jump will be the same height
+		
+	Auto Jump (default: true)
+		Determines if you can keep jumping repeatedly by holding 
+		down the jump button, or if you have to press it again 
+		after each jump.
+		
+	Clamp Ground Speed (default: false)
+		Limits your maximum ground speed on ground to the Ground
+		Limit value, making gaining speed by ground strafing, and 
+		techniques such as circle jumping impossible.
+	
+	Disable Bunny Hopping (default: false)
+		Clamps your speed to the Ground Limit value each time you
+		land, making you unable to maintain the speed gained
+		by air strafing.
+
+	If you prefer to have strafe jump physics instead of
+	bunny hopping, you can increase Air Limit and decrease
+	the Air Acceleration. For example, a value of 10 for both
+	is a good starting point
+
+
+SmoothPlayerCamera
+
+	Height (default: 0.5)
+		Sets the camera's height relative to player's transform
+		
+	Move Speed (default: 60)
+		Determines how quickly the camera reaches the player
+		Lower values cause more delay but higher values can
+		cause jitter
+		
+	Turn Speed (default: 60)
+		Determines how quickly the camera's rotation matches
+		player input. Lower values cause more delay but higher
+		values can cause jitter
+
+	Player Controller
+		This has to be assigned to the PlayerController script
+		on your player object.	
