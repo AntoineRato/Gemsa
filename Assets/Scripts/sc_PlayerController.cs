@@ -3,34 +3,65 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //[RequireComponent(typeof(PlayerPhysics))]
-public class PlayerController : MonoBehaviour
+public class sc_PlayerController : MonoBehaviour
 {
+    [Header("References")]
+    [Tooltip("Reference to the head of the player.")]
+    [SerializeField] private Transform playerHead;
+
+    [Header("Player Movements Configuration")]
+
+    [Header("Inputs")]
     [SerializeField] private string yAxisInput = "Vertical";
     [SerializeField] private string xAxisInput = "Horizontal";
     [SerializeField] private string inputMouseX = "Mouse X";
     [SerializeField] private string inputMouseY = "Mouse Y";
     [SerializeField] private string jumpButton = "Jump";
+
+    [Header("Properties")]
+    [Tooltip("Self-explanatory.")]
     [SerializeField] private float mouseSensitivity = 1f;
+    [Tooltip("Determines how quickly the player accelerates on ground.")]
     [SerializeField] private float groundAcceleration = 100f;
+    [Tooltip("Determines how quickly the player accelerates in air. Higher values will make gaining speed by air strafing easier. Surfing also works best with high values.")]
     [SerializeField] private float airAcceleration = 100f;
+    [Tooltip("Determines how quickly the camera's rotation matches player input. Lower values cause more delay but higher values can cause jitter.")]
+    [SerializeField] private float turnSpeed = 100f;
+    [Tooltip("Determines how quickly the camera reaches the player. Lower values cause more delay but higher values can cause jitter")]
+    [SerializeField] private float moveSpeed = 100f;
+    [Tooltip("Determines the maximum speed on ground. The actual speed in game will be generally a little slower due to friction. Note that you can exceed this value by ground strafing if Clamp Ground Speed is turned off.")]
     [SerializeField] private float groundLimit = 12f;
+    [Tooltip("Determines the maximum speed you can move in air without air strafing. Note that altering this value will change the behaviour of air strafing drastically, with higher values making gaining speed easier.")]
     [SerializeField] private float airLimit = 1f;
+    [Tooltip("Self-explanatory.")]
     [SerializeField] private float gravity = 16f;
+    [Tooltip("Self-explanatory. Note that higher values will make gaining speed by ground strafing harder.")]
     [SerializeField] private float friction = 6f;
+    [Tooltip("Self-explanatory. Note that this is a velocity value, not the actual height.")]
     [SerializeField] private float jumpHeight = 6f;
+    [Tooltip("How quickly you must travel upwards to make the controller think you're in air. In other words, the lower this value, the easier it is to slide up slopes.")]
     [SerializeField] private float rampSlideLimit = 5f;
+    [Tooltip("Determines on how steep slopes you can walk on.")]
     [SerializeField] private float slopeLimit = 45f;
+    [Tooltip("With this setting enabled, you can gain extra height by chaining multiple jumps together, or by jumping while running up a slope.When this setting is disabled, every jump will be the same height.")]
     [SerializeField] private bool additiveJump = true;
+    [Tooltip("Determines if you can keep jumping repeatedly by holding down the jump button, or if you have to press it again after each jump.")]
     [SerializeField] private bool autoJump = true;
+    [Tooltip("Limits your maximum ground speed on ground to the Ground Limit value, making gaining speed by ground strafing, and techniques such as circle jumping impossible.")]
     [SerializeField] private bool clampGroundSpeed = false;
+    [Tooltip("Clamps your speed to the Ground Limit value each time you land, making you unable to maintain the speed gained by air strafing.")]
     [SerializeField] private bool disableBunnyHopping = false;
 
     private Rigidbody rb;
+    private sc_PlayerProperties playerProperties;
 
     private Vector3 vel;
     private Vector3 inputDir;
     private Vector3 _inputRot;
     private Vector3 groundNormal;
+    //private Vector3 oldPosition;
+
+    private Quaternion oldRotation;
 
     private bool onGround = false;
     private bool jumpPending = false;
@@ -41,6 +72,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        playerProperties = this.GetComponent<sc_PlayerProperties>();
     }
 
     void Start()
@@ -48,15 +80,31 @@ public class PlayerController : MonoBehaviour
         // Lock cursor
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        //oldPosition = playerHead.position;
+        oldRotation = playerHead.rotation;
     }
 
 
     private void Update()
     {
-        MouseLook();
-        GetMovementInput();
+        if (!playerProperties.isDead)
+        {
+            MouseLook();
+            GetMovementInput();
+        }
     }
 
+    private void LateUpdate()
+    {
+        if (!playerProperties.isDead)
+        {
+            //playerHead.position = Vector3.Lerp(oldPosition, playerHead.position, moveSpeed * Time.deltaTime);
+            playerHead.rotation = Quaternion.Lerp(oldRotation, Quaternion.Euler(this.InputRot), turnSpeed * Time.deltaTime);
+
+            //oldPosition = playerHead.position;
+            oldRotation = playerHead.rotation;
+        }
+    }
 
     private void FixedUpdate()
     {

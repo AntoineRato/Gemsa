@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 
-public class SmoothPlayerCamera : MonoBehaviour
+public class sc_SmoothPlayerCamera : MonoBehaviour
 {
-    [SerializeField] private float height = 0.5f;
-    [SerializeField] private float moveSpeed = 100f;
+    /*
+    //[SerializeField] private float height = 0.5f;
+    //[SerializeField] private float moveSpeed = 100f;
     [SerializeField] private float turnSpeed = 100f;
-    [SerializeField] private float distanceLimit = 1f;
-    [SerializeField] private PlayerController controller;
+    //[SerializeField] private float distanceLimit = 1f;
+    [SerializeField] private sc_PlayerController controller;
 
     private Vector3 oldPos;
     private Quaternion oldRot;
@@ -29,6 +30,7 @@ public class SmoothPlayerCamera : MonoBehaviour
         //}
 
         //oldPos = transform.position;
-        //oldRot = transform.rotation;
+        oldRot = transform.rotation;
     }
+    */
 }
