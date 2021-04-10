@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//[RequireComponent(typeof(PlayerPhysics))]
+[RequireComponent(typeof(Animator))]
 public class sc_PlayerController : MonoBehaviour
 {
     [Header("References")]
@@ -63,6 +63,8 @@ public class sc_PlayerController : MonoBehaviour
 
     private Quaternion oldRotation;
 
+    private Animator playerAnimator;
+
     private bool onGround = false;
     private bool jumpPending = false;
     private bool ableToJump = true;
@@ -73,6 +75,7 @@ public class sc_PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         playerProperties = this.GetComponent<sc_PlayerProperties>();
+        playerAnimator = this.GetComponent<Animator>();
     }
 
     void Start()
@@ -99,7 +102,7 @@ public class sc_PlayerController : MonoBehaviour
         if (!playerProperties.isDead)
         {
             //playerHead.position = Vector3.Lerp(oldPosition, playerHead.position, moveSpeed * Time.deltaTime);
-            playerHead.rotation = Quaternion.Lerp(oldRotation, Quaternion.Euler(this.InputRot), turnSpeed * Time.deltaTime);
+            //playerHead.rotation = Quaternion.Lerp(oldRotation, Quaternion.Euler(this.InputRot), turnSpeed * Time.deltaTime);
 
             //oldPosition = playerHead.position;
             oldRotation = playerHead.rotation;
@@ -146,6 +149,8 @@ public class sc_PlayerController : MonoBehaviour
         // Reset onGround before next collision checks
         onGround = false;
         groundNormal = Vector3.zero;
+
+        UpdateAnimator();
     }
 
     void GetMovementInput()
@@ -160,6 +165,13 @@ public class sc_PlayerController : MonoBehaviour
 
         if (Input.GetButtonUp(jumpButton))
             jumpPending = false;
+    }
+
+    private void UpdateAnimator()
+    {
+        Vector3 localPlayerVelocity = this.transform.InverseTransformDirection(this.vel);
+        playerAnimator.SetFloat("xAxis", localPlayerVelocity.x);
+        playerAnimator.SetFloat("zAxis", localPlayerVelocity.z);
     }
 
     void MouseLook()
