@@ -102,7 +102,7 @@ public class sc_PlayerController : MonoBehaviour
         if (!playerProperties.isDead)
         {
             //playerHead.position = Vector3.Lerp(oldPosition, playerHead.position, moveSpeed * Time.deltaTime);
-            //playerHead.rotation = Quaternion.Lerp(oldRotation, Quaternion.Euler(this.InputRot), turnSpeed * Time.deltaTime);
+            playerHead.rotation = Quaternion.Lerp(oldRotation, Quaternion.Euler(this.InputRot), turnSpeed * Time.deltaTime);
 
             //oldPosition = playerHead.position;
             oldRotation = playerHead.rotation;
