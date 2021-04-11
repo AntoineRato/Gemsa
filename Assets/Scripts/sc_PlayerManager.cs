@@ -6,20 +6,21 @@ using Mirror;
 public class sc_PlayerManager : NetworkBehaviour
 {
     [SerializeField]
-    [Tooltip("Player head, to have the orientation of the crosshair.")]
-    private Transform playerHead;
-    [SerializeField]
     [Tooltip("Layer that player can hit by shooting.")]
     private LayerMask layerToShoot;
 
     [SerializeField]
     private sc_Weapon playerWeapon;
 
+    //Player camera, to have the orientation of the crosshair
+    private Transform playerCamera;
     private sc_PlayerProperties playerProperties;
 
     private void Awake()
     {
-        if (playerHead == null)
+        playerCamera = this.GetComponent<sc_PlayerController>().playerCamera;
+
+        if (playerCamera == null)
         {
             Debug.LogError("sc_PlayerManager : player head missing, component disabled.");
             this.enabled = false;
@@ -50,7 +51,7 @@ public class sc_PlayerManager : NetworkBehaviour
         {
             RaycastHit hit;
 
-            if (Physics.Raycast(playerHead.position, playerHead.forward, out hit, playerWeapon.range, layerToShoot))
+            if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, playerWeapon.range, layerToShoot))
             {
                 if (hit.collider.tag == "Player")
                 {

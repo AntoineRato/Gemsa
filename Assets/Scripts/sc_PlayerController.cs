@@ -6,9 +6,10 @@ using UnityEngine;
 public class sc_PlayerController : MonoBehaviour
 {
     [Header("References")]
+    [Tooltip("Reference to the camera of the player.")]
+    [SerializeField] public Transform playerCamera;
     [Tooltip("Reference to the head of the player.")]
     [SerializeField] private Transform playerHead;
-    [SerializeField] private Transform playerCamera;
 
     [Header("Player Movements Configuration")]
 
@@ -104,9 +105,11 @@ public class sc_PlayerController : MonoBehaviour
     {
         if (!playerProperties.isDead)
         {
+            UpdateAnimator();
+
             //playerHead.position = Vector3.Lerp(oldPosition, playerHead.position, moveSpeed * Time.deltaTime);
             playerHead.rotation = Quaternion.Lerp(oldRotationHead, Quaternion.Euler(new Vector3(Mathf.Clamp(this.InputRot.x, -60f, 50f), this.InputRot.y, this.InputRot.z)), turnSpeed * Time.deltaTime);
-            playerCamera.rotation = Quaternion.Lerp(oldRotationHead, Quaternion.Euler(this.InputRot), turnSpeed * Time.deltaTime);
+            playerCamera.rotation = Quaternion.Lerp(oldRotationCamera, Quaternion.Euler(this.InputRot), turnSpeed * Time.deltaTime);
 
             //oldPosition = playerHead.position;
             oldRotationHead = playerHead.rotation;
@@ -154,8 +157,6 @@ public class sc_PlayerController : MonoBehaviour
         // Reset onGround before next collision checks
         onGround = false;
         groundNormal = Vector3.zero;
-
-        UpdateAnimator();
     }
 
     void GetMovementInput()
