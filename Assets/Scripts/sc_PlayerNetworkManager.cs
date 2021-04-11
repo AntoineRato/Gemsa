@@ -13,7 +13,7 @@ public class sc_PlayerNetworkManager : NetworkBehaviour
     [Tooltip("Layer name for object that will not be display locally")]
     [SerializeField] private const string hideVisualLayerName = "HideVisual";
     [Tooltip("Object reference for visual skin that will not be display locally")]
-    [SerializeField] private GameObject objectHideVisual;
+    [SerializeField] private Transform[] listObjectHideVisual;
 
     private Camera menuCamera;
     private sc_SimpleCrosshair crosshair;
@@ -50,11 +50,19 @@ public class sc_PlayerNetworkManager : NetworkBehaviour
         GameManager.RegisterPlayer(this.GetComponent<NetworkIdentity>().netId, this.GetComponent<sc_PlayerProperties>());
     }
 
-    private void SetLayerNoDraw(GameObject hideVisualObject, int hideVisualLayer)
+    private void SetLayerNoDraw()
     {
-        foreach (MeshRenderer childRenderer in hideVisualObject.GetComponentsInChildren<MeshRenderer>())
+        for (int i = 0; i < listObjectHideVisual.Length; i++)
         {
-            childRenderer.gameObject.layer = hideVisualLayer;
+            foreach (MeshRenderer childRenderer in listObjectHideVisual[i].GetComponentsInChildren<MeshRenderer>())
+            {
+                childRenderer.gameObject.layer = LayerMask.NameToLayer(hideVisualLayerName);
+            }
+
+            foreach (SkinnedMeshRenderer childRenderer in listObjectHideVisual[i].GetComponentsInChildren<SkinnedMeshRenderer>())
+            {
+                childRenderer.gameObject.layer = LayerMask.NameToLayer(hideVisualLayerName);
+            }
         }
     }
 
@@ -82,8 +90,12 @@ public class sc_PlayerNetworkManager : NetworkBehaviour
             else
             {
                 child.gameObject.layer = LayerMask.NameToLayer(localPlayerLayerName);
-                SetLayerNoDraw(objectHideVisual, LayerMask.NameToLayer(hideVisualLayerName));
             }
+        }
+
+        if(isLocalPlayer)
+        {
+            SetLayerNoDraw();
         }
     }
 

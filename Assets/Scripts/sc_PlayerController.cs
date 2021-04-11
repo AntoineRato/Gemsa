@@ -8,6 +8,7 @@ public class sc_PlayerController : MonoBehaviour
     [Header("References")]
     [Tooltip("Reference to the head of the player.")]
     [SerializeField] private Transform playerHead;
+    [SerializeField] private Transform playerCamera;
 
     [Header("Player Movements Configuration")]
 
@@ -61,7 +62,8 @@ public class sc_PlayerController : MonoBehaviour
     private Vector3 groundNormal;
     //private Vector3 oldPosition;
 
-    private Quaternion oldRotation;
+    private Quaternion oldRotationHead;
+    private Quaternion oldRotationCamera;
 
     private Animator playerAnimator;
 
@@ -84,7 +86,8 @@ public class sc_PlayerController : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         //oldPosition = playerHead.position;
-        oldRotation = playerHead.rotation;
+        oldRotationHead = playerHead.rotation;
+        oldRotationCamera = playerCamera.rotation;
     }
 
 
@@ -102,10 +105,12 @@ public class sc_PlayerController : MonoBehaviour
         if (!playerProperties.isDead)
         {
             //playerHead.position = Vector3.Lerp(oldPosition, playerHead.position, moveSpeed * Time.deltaTime);
-            playerHead.rotation = Quaternion.Lerp(oldRotation, Quaternion.Euler(this.InputRot), turnSpeed * Time.deltaTime);
+            playerHead.rotation = Quaternion.Lerp(oldRotationHead, Quaternion.Euler(new Vector3(Mathf.Clamp(this.InputRot.x, -60f, 50f), this.InputRot.y, this.InputRot.z)), turnSpeed * Time.deltaTime);
+            playerCamera.rotation = Quaternion.Lerp(oldRotationHead, Quaternion.Euler(this.InputRot), turnSpeed * Time.deltaTime);
 
             //oldPosition = playerHead.position;
-            oldRotation = playerHead.rotation;
+            oldRotationHead = playerHead.rotation;
+            oldRotationCamera = playerCamera.rotation;
         }
     }
 

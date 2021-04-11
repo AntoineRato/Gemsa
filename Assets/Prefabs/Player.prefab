@@ -237,12 +237,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8423290469173276232}
-  m_LocalRotation: {x: -0.00000008940696, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalRotation: {x: 0.010662823, y: -0.011038869, z: -0.003672212, w: 0.99987555}
+  m_LocalPosition: {x: -0.0031762903, y: 1.586704, z: -0.045042552}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 9100687831892318617}
-  m_RootOrder: 3
+  m_Father: {fileID: 8423290469870725370}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &8423290469173276228
 Camera:
@@ -366,6 +366,7 @@ Transform:
   m_Children:
   - {fileID: 5301261351117990584}
   - {fileID: 8423290470113551156}
+  - {fileID: 8423290469173276231}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -398,6 +399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHead: {fileID: 9100687831892318617}
+  playerCamera: {fileID: 8423290469173276231}
   yAxisInput: Vertical
   xAxisInput: Horizontal
   inputMouseX: Mouse X
@@ -476,7 +478,9 @@ MonoBehaviour:
   - {fileID: 3856895553456092738}
   gameObjectsToDestroy:
   - {fileID: 8423290469173276232}
-  objectHideVisual: {fileID: 8423290470113551157}
+  listObjectHideVisual:
+  - {fileID: 8423290470113551156}
+  - {fileID: 5301261351117990584}
 --- !u!114 &3624487023742562992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1040,7 +1044,6 @@ Transform:
   - {fileID: 9100967688187618893}
   - {fileID: 9102586984162580861}
   - {fileID: 9100868920579646911}
-  - {fileID: 8423290469173276231}
   m_Father: {fileID: 9100736020227244959}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
