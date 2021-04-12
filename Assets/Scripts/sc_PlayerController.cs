@@ -175,9 +175,9 @@ public class sc_PlayerController : MonoBehaviour
 
     private void UpdateAnimator()
     {
-        Vector3 localPlayerVelocity = this.transform.InverseTransformDirection(this.vel);
-        playerAnimator.SetFloat("xAxis", localPlayerVelocity.x);
-        playerAnimator.SetFloat("zAxis", localPlayerVelocity.z);
+        //Vector3 localPlayerVelocity = this.transform.InverseTransformDirection(this.vel);
+        playerAnimator.SetFloat("xAxis", Input.GetAxisRaw(xAxisInput));
+        playerAnimator.SetFloat("zAxis", Input.GetAxisRaw(yAxisInput));
     }
 
     void MouseLook()

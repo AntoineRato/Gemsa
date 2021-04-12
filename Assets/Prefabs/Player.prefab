@@ -1867,7 +1867,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.1
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -2007,14 +2007,14 @@ MonoBehaviour:
   inputMouseY: Mouse Y
   jumpButton: Jump
   mouseSensitivity: 1
-  groundAcceleration: 60
+  groundAcceleration: 150
   airAcceleration: 100
   turnSpeed: 100
   moveSpeed: 100
   groundLimit: 9
   airLimit: 1
   gravity: 16
-  friction: 6
+  friction: 16
   jumpHeight: 7
   rampSlideLimit: 5
   slopeLimit: 45
@@ -2076,6 +2076,7 @@ MonoBehaviour:
   - {fileID: 8423290469870725372}
   - {fileID: 3624487023742562992}
   - {fileID: 3856895553456092738}
+  - {fileID: 0}
   gameObjectsToDestroy:
   - {fileID: 8423290469173276232}
   listObjectHideVisual:
