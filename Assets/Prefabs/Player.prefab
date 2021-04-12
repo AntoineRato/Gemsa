@@ -2095,11 +2095,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_crosshair:
-    size: 25
-    thickness: 10
-    dotThickness: 10
-    borderThickness: 8
-    gap: 15
+    size: 10
+    thickness: 3
+    dotThickness: 4
+    borderThickness: 4
+    gap: 8
     dot: 0
     border: 1
     color: {r: 0, g: 1, b: 0, a: 1}
