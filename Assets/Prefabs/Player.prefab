@@ -46,6 +46,37 @@ CapsuleCollider:
   m_Height: 1.7406051
   m_Direction: 1
   m_Center: {x: 0, y: 0.8737582, z: -0.032945976}
+--- !u!1 &5820673485340697532
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8453248533639320590}
+  m_Layer: 0
+  m_Name: HeadRotation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8453248533639320590
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5820673485340697532}
+  m_LocalRotation: {x: 0.45857096, y: -0.5382496, z: 0.45857096, w: 0.5382496}
+  m_LocalPosition: {x: -12.164462, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 6947491941885336594}
+  m_Father: {fileID: 6947399942619055636}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6951754381644378438
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,7 +540,7 @@ Transform:
   m_LocalPosition: {x: -11.188968, y: -6.661338e-16, z: -4.624413e-15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6947491941885336594}
+  - {fileID: 8453248533639320590}
   m_Father: {fileID: 6947489139166003404}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -937,14 +968,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6953063801613348802}
-  m_LocalRotation: {x: 0.458571, y: -0.5382496, z: 0.458571, w: 0.5382496}
-  m_LocalPosition: {x: -12.164435, y: -1.5099033e-14, z: -5.059176e-15}
+  m_LocalRotation: {x: -0.000000059604638, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6947771806768210886}
   - {fileID: 6950376815051758838}
   - {fileID: 6947532851429859380}
-  m_Father: {fileID: 6947399942619055636}
+  m_Father: {fileID: 8453248533639320590}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6953072186965255346
@@ -1969,7 +2000,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 8423290469173276231}
-  playerHead: {fileID: 0}
+  playerHead: {fileID: 8453248533639320590}
   yAxisInput: Vertical
   xAxisInput: Horizontal
   inputMouseX: Mouse X
@@ -1979,14 +2010,14 @@ MonoBehaviour:
   groundAcceleration: 60
   airAcceleration: 100
   turnSpeed: 100
-  moveSpeed: 100
-  groundLimit: 9
+  groundLimit: 7
   airLimit: 1
   gravity: 16
   friction: 6
   jumpHeight: 7
   rampSlideLimit: 5
   slopeLimit: 45
+  animatorSyncRate: 0.1
   additiveJump: 1
   autoJump: 1
   clampGroundSpeed: 0
@@ -2132,7 +2163,7 @@ MonoBehaviour:
   compressRotation: 1
   interpolateScale: 1
   syncScale: 0
-  target: {fileID: 0}
+  target: {fileID: 8453248533639320590}
 --- !u!95 &2477408042121748132
 Animator:
   serializedVersion: 3

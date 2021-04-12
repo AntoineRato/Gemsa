@@ -29,8 +29,8 @@ public class sc_PlayerController : MonoBehaviour
     [SerializeField] private float airAcceleration = 100f;
     [Tooltip("Determines how quickly the camera's rotation matches player input. Lower values cause more delay but higher values can cause jitter.")]
     [SerializeField] private float turnSpeed = 100f;
-    [Tooltip("Determines how quickly the camera reaches the player. Lower values cause more delay but higher values can cause jitter")]
-    [SerializeField] private float moveSpeed = 100f;
+    //[Tooltip("Determines how quickly the camera reaches the player. Lower values cause more delay but higher values can cause jitter")]
+    //[SerializeField] private float moveSpeed = 100f;
     [Tooltip("Determines the maximum speed on ground. The actual speed in game will be generally a little slower due to friction. Note that you can exceed this value by ground strafing if Clamp Ground Speed is turned off.")]
     [SerializeField] private float groundLimit = 12f;
     [Tooltip("Determines the maximum speed you can move in air without air strafing. Note that altering this value will change the behaviour of air strafing drastically, with higher values making gaining speed easier.")]
@@ -45,6 +45,8 @@ public class sc_PlayerController : MonoBehaviour
     [SerializeField] private float rampSlideLimit = 5f;
     [Tooltip("Determines on how steep slopes you can walk on.")]
     [SerializeField] private float slopeLimit = 45f;
+    [Tooltip("Animator synchronisation interval rate. Low values can cause jitter.")]
+    [SerializeField] private float animatorSyncRate = 0.1f;
     [Tooltip("With this setting enabled, you can gain extra height by chaining multiple jumps together, or by jumping while running up a slope.When this setting is disabled, every jump will be the same height.")]
     [SerializeField] private bool additiveJump = true;
     [Tooltip("Determines if you can keep jumping repeatedly by holding down the jump button, or if you have to press it again after each jump.")]
@@ -61,6 +63,8 @@ public class sc_PlayerController : MonoBehaviour
     private Vector3 inputDir;
     private Vector3 _inputRot;
     private Vector3 groundNormal;
+    private Vector3 previousLocalPlayerVelocity;
+    private Vector3 localPlayerVelocity;
     //private Vector3 oldPosition;
 
     private Quaternion oldRotationHead;
@@ -79,6 +83,8 @@ public class sc_PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         playerProperties = this.GetComponent<sc_PlayerProperties>();
         playerAnimator = this.GetComponent<Animator>();
+        localPlayerVelocity = Vector3.zero;
+        previousLocalPlayerVelocity = Vector3.zero;
     }
 
     void Start()
@@ -175,9 +181,45 @@ public class sc_PlayerController : MonoBehaviour
 
     private void UpdateAnimator()
     {
-        Vector3 localPlayerVelocity = this.transform.InverseTransformDirection(this.vel);
-        playerAnimator.SetFloat("xAxis", localPlayerVelocity.x);
-        playerAnimator.SetFloat("zAxis", localPlayerVelocity.z);
+        //Debug.Log(("Previous z : " + previousLocalPlayerVelocity.z));
+        //Debug.Log(("Value z : " + localPlayerVelocity.z));
+        
+        /*localPlayerVelocity = this.transform.InverseTransformDirection(this.vel);
+        if (Mathf.Abs(previousLocalPlayerVelocity.x - localPlayerVelocity.x) >= animatorSyncRate)
+        {
+            previousLocalPlayerVelocity.x = localPlayerVelocity.x;
+            if(localPlayerVelocity.x >= 0.1)
+                playerAnimator.SetFloat("xAxis", localPlayerVelocity.x, 1f, Time.deltaTime * 100f);
+            else
+                playerAnimator.SetFloat("xAxis", 0f, 1f, Time.deltaTime * 100f);
+        }
+
+        if (Mathf.Abs(playerAnimator.GetFloat("zAxis") - localPlayerVelocity.z) >= animatorSyncRate)
+        {
+            //Debug.Log("NumberOfSend");
+
+            if (localPlayerVelocity.z >= 0.1f || localPlayerVelocity.z <= -0.1f)
+            {
+                playerAnimator.SetFloat("zAxis", localPlayerVelocity.z, 1f, Time.deltaTime * 10f);
+                //previousLocalPlayerVelocity.z = localPlayerVelocity.z;
+            }
+            else
+            {
+                playerAnimator.SetFloat("zAxis", 0f, 1f, Time.deltaTime * 10f);
+                //previousLocalPlayerVelocity.z = 0f;
+            }
+        }
+        else if(playerAnimator.GetFloat("zAxis") != 0f && (localPlayerVelocity.z >= 0.1f || localPlayerVelocity.z <= -0.1f))
+        {
+            playerAnimator.SetFloat("zAxis", 0f);
+        }*/
+        
+        
+        localPlayerVelocity = this.transform.InverseTransformDirection(this.vel);
+        //playerAnimator.SetFloat("xAxis", localPlayerVelocity.x / (groundLimit * 0.75f));
+        //playerAnimator.SetFloat("zAxis", localPlayerVelocity.z / (groundLimit * 0.75f));
+        playerAnimator.SetFloat("xAxis", localPlayerVelocity.x / (groundLimit - 1f), 1f, Time.deltaTime * 10f);
+        playerAnimator.SetFloat("zAxis", localPlayerVelocity.z / (groundLimit - 1f), 1f, Time.deltaTime * 10f);
     }
 
     void MouseLook()
