@@ -251,6 +251,9 @@ public class sc_PlayerController : MonoBehaviour
 
         if (!autoJump)
             jumpPending = false;
+        
+        playerAnimator.SetBool("jump", true);
+        playerAnimator.SetBool("onGround", false);
 
         StartCoroutine(JumpTimer());
     }
@@ -271,6 +274,8 @@ public class sc_PlayerController : MonoBehaviour
             {
                 groundNormal = contact.normal;
                 onGround = true;
+                if(ableToJump)
+                    playerAnimator.SetBool("onGround", true);
                 return;
             }
         }
@@ -281,6 +286,7 @@ public class sc_PlayerController : MonoBehaviour
     {
         ableToJump = false;
         yield return new WaitForSeconds(0.1f);
+        playerAnimator.SetBool("jump", false);
         ableToJump = true;
     }
 
