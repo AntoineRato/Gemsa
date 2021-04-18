@@ -2006,12 +2006,16 @@ MonoBehaviour:
   inputMouseX: Mouse X
   inputMouseY: Mouse Y
   jumpButton: Jump
+  walkButton: Walk
+  crounchButton: Crounch
   mouseSensitivity: 1
   groundAcceleration: 150
   airAcceleration: 100
   turnSpeed: 100
   moveSpeed: 100
-  groundLimit: 9
+  groundLimitSprint: 10
+  groundLimitWalk: 5
+  groundLimitCrounch: 3
   airLimit: 1
   gravity: 16
   friction: 16

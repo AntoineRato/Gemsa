@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
@@ -20,6 +21,8 @@ public class sc_PlayerController : MonoBehaviour
     [SerializeField] private string inputMouseX = "Mouse X";
     [SerializeField] private string inputMouseY = "Mouse Y";
     [SerializeField] private string jumpButton = "Jump";
+    [SerializeField] private string walkButton = "Walk";
+    [SerializeField] private string crounchButton = "Crounch";
 
     [Header("Properties")]
     [Tooltip("Self-explanatory.")]
@@ -32,8 +35,12 @@ public class sc_PlayerController : MonoBehaviour
     [SerializeField] private float turnSpeed = 100f;
     [Tooltip("Determines how quickly the camera reaches the player. Lower values cause more delay but higher values can cause jitter")]
     [SerializeField] private float moveSpeed = 100f;
-    [Tooltip("Determines the maximum speed on ground. The actual speed in game will be generally a little slower due to friction. Note that you can exceed this value by ground strafing if Clamp Ground Speed is turned off.")]
-    [SerializeField] private float groundLimit = 12f;
+    [Tooltip("Determines the maximum speed on ground when sprinting. The actual speed in game will be generally a little slower due to friction. Note that you can exceed this value by ground strafing if Clamp Ground Speed is turned off.")]
+    [SerializeField] private float groundLimitSprint = 12f;
+    [Tooltip("Determines the maximum speed on ground when walking.")]
+    [SerializeField] private float groundLimitWalk = 8f;
+    [Tooltip("Determines the maximum speed on ground when crounching.")]
+    [SerializeField] private float groundLimitCrounch = 4f;
     [Tooltip("Determines the maximum speed you can move in air without air strafing. Note that altering this value will change the behaviour of air strafing drastically, with higher values making gaining speed easier.")]
     [SerializeField] private float airLimit = 1f;
     [Tooltip("Self-explanatory.")]
@@ -72,6 +79,9 @@ public class sc_PlayerController : MonoBehaviour
     private bool onGround = false;
     private bool jumpPending = false;
     private bool ableToJump = true;
+    private bool isWalk = false;
+    private bool isCrounch = false;
+    private float groundLimit;
 
     public Vector3 InputRot { get => _inputRot; }
 
@@ -80,6 +90,7 @@ public class sc_PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         playerProperties = this.GetComponent<sc_PlayerProperties>();
         playerAnimator = this.GetComponent<Animator>();
+        groundLimit = groundLimitSprint;
     }
 
     void Start()
@@ -137,7 +148,10 @@ public class sc_PlayerController : MonoBehaviour
 
         // We use air physics if moving upwards at high speed
         if (rampSlideLimit >= 0f && vel.y > rampSlideLimit)
+        {
             onGround = false;
+            playerAnimator.SetBool("onGround", false);
+        }
 
         if (onGround)
         {
@@ -157,6 +171,7 @@ public class sc_PlayerController : MonoBehaviour
 
         // Reset onGround before next collision checks
         onGround = false;
+        playerAnimator.SetBool("onGround", false);
         groundNormal = Vector3.zero;
     }
 
@@ -172,6 +187,37 @@ public class sc_PlayerController : MonoBehaviour
 
         if (Input.GetButtonUp(jumpButton))
             jumpPending = false;
+
+        if (Input.GetButtonDown(crounchButton))
+        {
+            isCrounch = true;
+            playerAnimator.SetBool("crounch", true);
+            groundLimit = groundLimitCrounch;
+        }
+        else if (Input.GetButtonUp(crounchButton))
+        {
+            isCrounch = false;
+            playerAnimator.SetBool("crounch", false);
+            if (isWalk)
+                groundLimit = groundLimitWalk;
+            else
+                groundLimit = groundLimitSprint;
+        }
+        
+        if (Input.GetButtonDown(walkButton))
+        {
+            isWalk = true;
+            playerAnimator.SetBool("walk", true);
+            if(!isCrounch)
+                groundLimit = groundLimitWalk;
+        }
+        else if (Input.GetButtonUp(walkButton))
+        {
+            isWalk = false;
+            playerAnimator.SetBool("walk", false);
+            if(!isCrounch)
+                groundLimit = groundLimitSprint;
+        }
     }
 
     private void UpdateAnimator()
@@ -273,9 +319,13 @@ public class sc_PlayerController : MonoBehaviour
             if (contact.normal.y > Mathf.Sin(slopeLimit * (Mathf.PI / 180f) + Mathf.PI / 2f))
             {
                 groundNormal = contact.normal;
-                onGround = true;
-                if(ableToJump)
+
+                if (ableToJump && !onGround)
+                {
+                    onGround = true;
                     playerAnimator.SetBool("onGround", true);
+                }
+
                 return;
             }
         }
