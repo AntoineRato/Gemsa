@@ -3,8 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="4162238f-9fad-4ec6-8083-90f1fd2f29b2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Gemsa/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Gemsa/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/PlayerAnimator.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/PlayerAnimator.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Scene_Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Scene_Main.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/sc_PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/sc_PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/sc_PlayerManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/sc_PlayerManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/sc_PlayerNetworkManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/sc_PlayerNetworkManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +28,8 @@
   <component name="IdeDocumentHistory">
     <changedPaths>
       <option value="$PROJECT_DIR$/Assets/Scripts/sc_SimpleCrosshair.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/sc_PlayerNetworkManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/sc_PlayerManager.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/sc_PlayerController.cs" />
     </changedPaths>
   </component>
@@ -71,7 +76,7 @@
       <updated>1618673666670</updated>
       <workItem from="1618673678555" duration="9418000" />
       <workItem from="1619249037559" duration="593000" />
-      <workItem from="1619340376761" duration="386000" />
+      <workItem from="1619340376761" duration="4402000" />
     </task>
     <servers />
   </component>

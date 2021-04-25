@@ -29,12 +29,6 @@ public class sc_PlayerManager : NetworkBehaviour
         this.playerProperties = this.GetComponent<sc_PlayerProperties>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {

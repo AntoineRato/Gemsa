@@ -101,7 +101,7 @@ public class sc_PlayerNetworkManager : NetworkBehaviour
 
     private void OnDisable()
     {
-        if(menuCamera != null)
+        if(menuCamera != null && isLocalPlayer)
         {
             menuCamera.gameObject.SetActive(true);
         }

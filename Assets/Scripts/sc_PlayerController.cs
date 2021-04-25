@@ -111,6 +111,8 @@ public class sc_PlayerController : MonoBehaviour
             MouseLook();
             GetMovementInput();
         }
+
+        ToggleCursor();
     }
 
     private void LateUpdate()
@@ -126,6 +128,23 @@ public class sc_PlayerController : MonoBehaviour
             //oldPosition = playerHead.position;
             oldRotationHead = playerHead.rotation;
             oldRotationCamera = playerCamera.rotation;
+        }
+    }
+
+    private void ToggleCursor()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!Cursor.visible && Cursor.lockState == CursorLockMode.Locked)
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.Confined;
+            }
+            else
+            {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
         }
     }
 
@@ -171,7 +190,7 @@ public class sc_PlayerController : MonoBehaviour
 
         // Reset onGround before next collision checks
         onGround = false;
-        playerAnimator.SetBool("onGround", false);
+        // playerAnimator.SetBool("onGround", false);
         groundNormal = Vector3.zero;
     }
 
