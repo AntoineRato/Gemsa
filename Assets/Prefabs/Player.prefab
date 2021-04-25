@@ -1824,7 +1824,7 @@ GameObject:
   - component: {fileID: 8423290469173276229}
   - component: {fileID: 8423290469173276230}
   m_Layer: 0
-  m_Name: Camera
+  m_Name: PlayerCamera
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1917,8 +1917,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 0
-  m_Antialiasing: 0
+  m_RenderPostProcessing: 1
+  m_Antialiasing: 1
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
@@ -2080,7 +2080,6 @@ MonoBehaviour:
   - {fileID: 8423290469870725372}
   - {fileID: 3624487023742562992}
   - {fileID: 3856895553456092738}
-  - {fileID: 0}
   gameObjectsToDestroy:
   - {fileID: 8423290469173276232}
   listObjectHideVisual:
