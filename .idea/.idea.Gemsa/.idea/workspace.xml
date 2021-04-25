@@ -5,9 +5,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Gemsa/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Gemsa/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Scene_Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Scene_Main.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/sc_PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/sc_PlayerController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/sc_PlayerManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/sc_PlayerManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/sc_PlayerNetworkManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/sc_PlayerNetworkManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/sc_PlayerProperties.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/sc_PlayerProperties.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,8 +28,10 @@
     <changedPaths>
       <option value="$PROJECT_DIR$/Assets/Scripts/sc_SimpleCrosshair.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/sc_PlayerNetworkManager.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/sc_PlayerManager.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/sc_PlayerController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/sc_PlayerManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/NoBehaviour_Scripts/sc_MiniGameSettings.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/sc_PlayerProperties.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1rIps159fXZ2oBO2atZ1keSPZ54" />
@@ -76,7 +77,7 @@
       <updated>1618673666670</updated>
       <workItem from="1618673678555" duration="9418000" />
       <workItem from="1619249037559" duration="593000" />
-      <workItem from="1619340376761" duration="4402000" />
+      <workItem from="1619340376761" duration="7653000" />
     </task>
     <servers />
   </component>

@@ -22,7 +22,7 @@ public class sc_PlayerManager : NetworkBehaviour
 
         if (playerCamera == null)
         {
-            Debug.LogError("sc_PlayerManager : player head missing, component disabled.");
+            Debug.LogError("sc_PlayerManager : player camera missing, component disabled.");
             this.enabled = false;
         }
 

@@ -26,6 +26,7 @@ public class sc_PlayerProperties : NetworkBehaviour
     public void ResetValues()
     {
         this.currentHealth = maxHealth;
+        isDead = false;
     }
 
     private IEnumerator Respawn()
